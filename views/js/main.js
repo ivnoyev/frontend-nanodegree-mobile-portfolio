@@ -367,7 +367,7 @@ var pizzaElementGenerator = function (i) {
   pizzaContainer.id = "pizza" + i;
   pizzaImageContainer.style.width = "35%";
 
-  pizzaImage.src = "images/pizza.png";
+  pizzaImage.src = "images/pizza.webp";
   pizzaImage.classList.add("img-responsive");
   pizzaImageContainer.appendChild(pizzaImage);
   pizzaContainer.appendChild(pizzaImageContainer);
@@ -475,7 +475,7 @@ function updatePositions() {
 
   // Calculate scroll position once
   var scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
-  
+
   // Pre-calculate phases for 5 unique positions (since we use i % 5)
   for (var i = 0; i < 5; i++) {
     phaseCache[i] = Math.sin((scrollTop / 1250) + i);
@@ -483,13 +483,12 @@ function updatePositions() {
 
   // Get all mover elements
   var items = document.querySelectorAll('.mover');
-  
+
   // Use transform instead of left for better performance
   for (var i = 0; i < items.length; i++) {
     var phase = phaseCache[i % 5];
-    var translateX = items[i].basicLeft + 100 * phase;
-    // Use transform for hardware acceleration
-    items[i].style.transform = 'translateX(' + translateX + 'px)';
+    var offset = 100 * phase;
+    items[i].style.transform = 'translate3d(' + offset + 'px, 0, 0)';
   }
 
   window.performance.mark("mark_end_frame");
@@ -509,7 +508,7 @@ function requestTick() {
   }
 }
 
-window.addEventListener('scroll', function() {
+window.addEventListener('scroll', function () {
   requestTick();
   ticking = false;
 });
@@ -518,20 +517,21 @@ window.addEventListener('scroll', function() {
 document.addEventListener('DOMContentLoaded', function () {
   var cols = 8;
   var s = 256;
-  
+
   // Calculate number of pizzas based on screen height
   var height = window.innerHeight;
   var rows = Math.ceil(height / s) + 1; // Add 1 extra row for buffer
   var numberOfPizzas = cols * rows;
-  
+
   // Create only the visible pizzas (instead of 200)
   for (var i = 0; i < numberOfPizzas; i++) {
     var elem = document.createElement('img');
     elem.className = 'mover';
-    elem.src = "images/pizza.png";
+    elem.src = "images/pizza.webp";
     elem.style.height = "100px";
     elem.style.width = "73.333px";
     elem.basicLeft = (i % cols) * s;
+    elem.style.left = elem.basicLeft + 'px';
     elem.style.top = (Math.floor(i / cols) * s) + 'px';
     // Add will-change for optimization hint
     elem.style.willChange = 'transform';
