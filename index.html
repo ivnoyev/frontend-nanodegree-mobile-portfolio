@@ -4,9 +4,13 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content=" FILL ME IN ">
-  <meta name="author" content=" FILL ME IN ">
+  <meta name="description" content="Cameron Pittman's Portfolio">
+  <meta name="author" content="Cameron Pittman">
   <title>Cameron Pittman: Portfolio</title>
+
+  <!-- Preload шрифтов для ускорения загрузки -->
+  <link rel="preload" href="fonts/open-sans-400.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="fonts/open-sans-700.woff2" as="font" type="font/woff2" crossorigin>
 
   <style>
     html {
@@ -22,7 +26,7 @@
       font-size: 14px;
       line-height: 1.61;
       font-weight: 400;
-      font-family: 'Open Sans', sans-serif;
+      font-family: 'Open Sans', Arial, Helvetica, sans-serif; /* Обновлённый стек шрифтов */
       color: #333;
     }
 
@@ -150,6 +154,7 @@
       font-style: normal;
       font-weight: 400;
       src: local('Open Sans'), local('OpenSans'), url('fonts/open-sans-400.woff2') format('woff2');
+      font-display: swap; /* Добавлено для быстрого отображения текста */
     }
 
     @font-face {
@@ -157,6 +162,7 @@
       font-style: normal;
       font-weight: 700;
       src: local('Open Sans Bold'), local('OpenSans-Bold'), url('fonts/open-sans-700.woff2') format('woff2');
+      font-display: swap; /* Добавлено для bold-версии */
     }
   </style>
 
